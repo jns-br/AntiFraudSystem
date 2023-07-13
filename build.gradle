@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+}
+
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+applicationDefaultJvmArgs = ["--add-opens java.base/java.lang=ALL-UNNAMED"]
+
+sourceSets.main.resources.srcDirs = ["src/resources"]
+test {
+    jvmArgs = ["--add-opens", "java.base/java.lang=ALL-UNNAMED"]
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
+    runtimeOnly 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.28'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+}
